@@ -70,9 +70,25 @@ This project combines a Django backend with a React frontend. Django serves as t
    yarn install
    ```
 
-## Running the Application
+## Running the Application in React Dev Mode
 
 1. Start the Django development server:
+   ```
+   python manage.py runserver
+   ```
+
+2. In a separate terminal, build the React application:
+   ```
+   cd frontend
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+## Running the Application in React Production Mode
+
+1. Remove `INTERNAL_IPS` variable from settings.py
+2. Start the Django development server:
    ```
    python manage.py runserver
    ```
