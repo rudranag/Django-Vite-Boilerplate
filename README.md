@@ -20,9 +20,9 @@ This project combines a Django backend with a React frontend. Django serves as t
 
 ## Prerequisites
 
-- Python 3.8+
-- Node.js 14+
-- npm 6+ or yarn 1.22+
+- Python 3.11
+- Node.js 20.11.0
+- npm 10 
 
 ## Setup
 
