@@ -104,6 +104,7 @@ This project combines a Django backend with a React frontend. Django serves as t
 3. Access the application:
    - Django admin: http://localhost:8000/admin/
    - React app: http://localhost:8000/r/
+   - A Sample Todo App using Material UI: http://localhost:8000/r/todo
 
 Note: The behavior of the React app in development and production environments is controlled by the `INTERNAL_IPS` setting in Django's `settings.py`. This setting determines whether the React app is served as static files by Django or if it should use the Vite development server.
 
