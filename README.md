@@ -120,15 +120,18 @@ This project integrates Django and React using the following approach:
    - React application is set up using Vite for fast development and optimized production builds.
    - It's located in the `frontend` directory.
 
-3. **Integration Mechanism:**
-   - The behavior is controlled by the `INTERNAL_IPS` setting in `settings.py`:
-     - In development (when the client IP is in `INTERNAL_IPS`):
-       - React app uses the Vite development server.
-       - Django template (`react_base.html`) includes necessary scripts to load the React app from the Vite dev server.
-     - In production (when the client IP is not in `INTERNAL_IPS`):
+3. **Integration Mechanism and react_base.html:**
+   - The integration is controlled by the `INTERNAL_IPS` setting in `settings.py`.
+   - The `react_base.html` file in `apps/vite_integration/templates/` is crucial for rendering the React application within Django.
+   - Behavior based on `INTERNAL_IPS`:
+     - When the client IP is in `INTERNAL_IPS` (development mode):
+       - It includes scripts to connect to the Vite development server (running on port 9900).
+       - Enables Hot Module Replacement (HMR) for React.
+       - Loads the main React entry point (`main.tsx`) from the Vite dev server.
+     - When the client IP is not in `INTERNAL_IPS` (production mode):
        - React app is built using Vite.
        - Django serves the built React files as static assets.
-       - A custom template tag (`render_vite_bundle`) is used to include the correct React bundle in Django templates.
+       - Uses the `render_vite_bundle` template tag to include the correct React bundle.
 
 4. **Routing:**
    - React Router handles frontend routing.
