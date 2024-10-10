@@ -1,0 +1,41 @@
+{% load render_vite_bundle %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {% if debug %}
+            <script type="module" src="http://127.0.0.1:9900/@vite/client"></script>
+
+            <!-- If you're using vite with React, this next script will be needed for HMR -->
+            <script type="module">
+                import RefreshRuntime from "http://127.0.0.1:9900/@react-refresh";
+                if (RefreshRuntime) {
+                    RefreshRuntime.injectIntoGlobalHook(window);
+                    window.$RefreshReg$ = () => {};
+                    window.$RefreshSig$ = () => (type) => type;
+                    window.__vite_plugin_react_preamble_installed__ = true;
+                }
+            </script>
+        {% endif %}
+    </head>
+
+    <body>
+        <div id="root"></div>
+        <script>
+            window.addEventListener("vite:preloadError", (event) => {
+                window.location.reload(); // for example, refresh the page
+            });
+        </script>
+        <!-- When build files changes, react cannot find dynamic / lazy imports -->
+        
+        {% if debug %}
+            <!-- This url will be different for each type of app. Point it to your main tsx file. -->
+            <script type="module" src="http://127.0.0.1:9900/main.tsx"></script>
+        {% else %} 
+            {% render_vite_bundle %} 
+        {% endif %}
+    </body>
+</html>
