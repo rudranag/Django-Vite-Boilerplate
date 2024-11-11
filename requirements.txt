@@ -56,3 +56,4 @@ django-celery-beat==2.6.0
 coverage==7.6.0
 selenium==4.23.1
 django-debug-toolbar==4.4.6
+allure-pytest==2.13.5
