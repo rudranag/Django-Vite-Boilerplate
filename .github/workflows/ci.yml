@@ -10,8 +10,6 @@ jobs:
   
   django:
     runs-on: ubuntu-latest
-    id: django-tests
-
 
     steps:
     - name: Check out the repository
