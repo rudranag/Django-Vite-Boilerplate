@@ -58,6 +58,7 @@ LOCAL_APPS = [
     "apps.vite_integration",
     "apps.todos",
     "apps.swagger",
+    "apps.contacts",
 ]
 
 SITE_ID = 1
