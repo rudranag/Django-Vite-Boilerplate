@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","4247","test_add_todo_item","Selenium","Wed Nov 20 12:35:15 GMT 2024","passed","Wed Nov 20 12:35:20 GMT 2024","TestAddTodoItem","test_todo","",""
+"","2432","test_edit_todo_item","Selenium","Wed Nov 20 12:35:20 GMT 2024","passed","Wed Nov 20 12:35:22 GMT 2024","TestAddTodoItem","test_todo","",""
+"","2108","test_delete_todo_item","Selenium","Wed Nov 20 12:35:22 GMT 2024","passed","Wed Nov 20 12:35:24 GMT 2024","TestAddTodoItem","test_todo","",""
+"","2811","test_add_incorrect_todo_item","Selenium","Wed Nov 20 12:35:24 GMT 2024","passed","Wed Nov 20 12:35:27 GMT 2024","TestAddTodoItem","test_todo","",""
