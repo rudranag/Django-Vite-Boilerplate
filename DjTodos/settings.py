@@ -58,6 +58,7 @@ LOCAL_APPS = [
     "apps.vite_integration",
     "apps.todos",
     "apps.swagger",
+    "apps.users",
 ]
 
 SITE_ID = 1
@@ -164,9 +165,9 @@ STATIC_URL = "/static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-# INTERNAL_IPS = [
-#     "127.0.0.1",
-# ]
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 
 ############################  React related stuff ####################
@@ -190,7 +191,7 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = "staticfiles/"
 
-LOGIN_URL = "/admin/login/"
+LOGIN_URL = "/r/login/"
 
 ENABLE_DEBUG_TOOLBAR = env.bool("ENABLE_DEBUG_TOOLBAR", default=False)
 

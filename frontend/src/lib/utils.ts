@@ -21,6 +21,9 @@ export function getCookie(name: string) {
 
 export const defaultUnauthorizedHandler = () => {
     if (!window.location.pathname.startsWith('/login')) {
-      window.location.href = `/login?next=${window.location.href}`;
+        const currentPath = window.location.pathname;
+        const searchParams = new URLSearchParams();
+        searchParams.set('next', currentPath);
+        window.location.href = `/r/login?${searchParams.toString()}`;
     }
-  };
+};
