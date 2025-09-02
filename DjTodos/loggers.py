@@ -10,7 +10,7 @@ env.read_env(os.path.join(BASE_DIR, ".env"))
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-LOG_PATH = os.path.abspath(os.path.join(BASE_DIR, "logs"))
+LOG_PATH = os.path.abspath(os.path.join(BASE_DIR, "../logs"))
 
 
 DEFAULT_LOG = "djtodos.log"
