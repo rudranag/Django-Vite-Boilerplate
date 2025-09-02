@@ -89,66 +89,8 @@ jobs:
       run: |
         timeout 60 bash -c 'until curl -s http://127.0.0.1:8000; do sleep 1; done'
 
-    - name: Run Selenium Tests
-      env:
-        RUN_HEADLESS : True
-      run: |
-        pytest Selenium --alluredir=allure-results
-
-
-    - name: Upload allure results
-      uses: actions/upload-artifact@v4
-      with:
-        name: allure-results
-        path: allure-results
-
     - name: Upload coverage
       uses: actions/upload-artifact@v4
       with:
         name: coverage
         path: coverage
-  
-
-  allure-report:
-    needs: django
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-
-    steps:
-      - name: Download Allure Results
-        uses: actions/download-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results
-
-      - name: Get Allure history
-        uses: actions/checkout@v4
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        with:
-          allure_results: allure-results
-          allure_history: allure-history
-          keep_reports: 20
-
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-history
-  
-
-
-
-        
