@@ -13,8 +13,8 @@ describe("Sidebar", () => {
                 </MemoryRouter>
             );
             const list = screen.getByRole("list");
-            const listItems = within(list).getAllByRole("link");
-            expect(listItems).toHaveLength(4);
+            expect(within(list).getAllByRole("listitem")).toHaveLength(4);
+            expect(within(list).getAllByRole("link")).toHaveLength(4);
             expect(screen.getByText("Dashboard")).toBeInTheDocument();
             expect(screen.getByText("Orders")).toBeInTheDocument();
             expect(screen.getByText("Customers")).toBeInTheDocument();
@@ -27,17 +27,17 @@ describe("Sidebar", () => {
                     <List>{mainListItems}</List>
                 </MemoryRouter>
             );
-            const dashboardLink = screen.getByRole("link", { name: /dashboard/i });
-            expect(dashboardLink).toHaveAttribute("href", "/dashboard");
-
-            const ordersLink = screen.getByRole("link", { name: /orders/i });
-            expect(ordersLink).toHaveAttribute("href", "/orders");
-
-            const customersLink = screen.getByRole("link", { name: /customers/i });
-            expect(customersLink).toHaveAttribute("href", "/");
-
-            const todosLink = screen.getByRole("link", { name: /todos/i });
-            expect(todosLink).toHaveAttribute("href", "/todo");
+            const list = screen.getByRole("list");
+            const cases: Array<{ name: RegExp; href: string }> = [
+                { name: /dashboard/i, href: "/dashboard" },
+                { name: /orders/i, href: "/orders" },
+                { name: /customers/i, href: "/" },
+                { name: /todos/i, href: "/todo" },
+            ];
+            cases.forEach(({ name, href }) => {
+                const link = within(list).getByRole("link", { name });
+                expect(link).toHaveAttribute("href", href);
+            });
         });
     });
 });
