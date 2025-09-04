@@ -14,3 +14,9 @@ class TodoCreateSchema(Schema):
     title: str = Field(..., max_length=200)
     description: str
     completed: bool = False
+
+
+class TodoUpdateSchema(Schema):
+    title: str = Field(None, max_length=200)
+    description: str = None
+    completed: bool = None

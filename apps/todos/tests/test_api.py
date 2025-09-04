@@ -113,3 +113,22 @@ class TodoAPITestCase(TestCase):
         self.client.login(username='user2', password='password2')
         response = self.client.get(self.todo_detail_url)
         self.assertEqual(response.status_code, 404)
+
+    def test_todo_partial_update(self):
+        # Test partially updating a todo
+        self.client.login(username='user1', password='password1')
+
+        # First, mark the todo as completed
+        update_data = {'completed': True}
+        response = self.client.put(self.todo_detail_url, json.dumps(update_data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.todo1.refresh_from_db()
+        self.assertEqual(self.todo1.completed, True)
+
+        # Now, update only the title
+        update_data = {'title': 'Partially Updated Todo'}
+        response = self.client.put(self.todo_detail_url, json.dumps(update_data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.todo1.refresh_from_db()
+        self.assertEqual(self.todo1.title, 'Partially Updated Todo')
+        self.assertEqual(self.todo1.completed, True)
