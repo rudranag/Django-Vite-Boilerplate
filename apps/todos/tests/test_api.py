@@ -46,7 +46,7 @@ class TodoAPITestCase(TestCase):
             'completed': False
         }
         response = self.client.post(self.todo_list_create_url, json.dumps(data), content_type='application/json')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
         self.assertEqual(Todo.objects.count(), 2)
         self.assertEqual(Todo.objects.get(id=response.json()['id']).title, 'New Todo')
 
