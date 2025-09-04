@@ -48,8 +48,6 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "rest_framework",
-    "drf_yasg",
     "django_celery_beat",
     # 'simple_history',
 ]
@@ -57,7 +55,6 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "apps.vite_integration",
     "apps.todos",
-    "apps.swagger",
     "apps.users",
 ]
 
