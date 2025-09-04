@@ -6,6 +6,7 @@ import json
 from django import template
 from django.conf import settings
 from django.utils.safestring import mark_safe
+from django.utils.html import escape
 
 register = template.Library()
 
@@ -29,7 +30,7 @@ def render_vite_bundle():
 
         imports_files = "".join(
             [
-                f'<script type="module" src="/static/{manifest[file]["file"]}"></script>'
+                f'<script type="module" src="/static/{escape(manifest[file]["file"])}"></script>'
                 for file in manifest["index.html"]["imports"]
             ]
         )
@@ -37,12 +38,12 @@ def render_vite_bundle():
         imports_files = ''
     
     if "css" in manifest["index.html"]:
-        css_file = f"""<link rel="stylesheet" type="text/css" href="/static/{manifest['index.html']['css'][0]}" />"""
+        css_file = f"""<link rel="stylesheet" type="text/css" href="/static/{escape(manifest['index.html']['css'][0])}" />"""
     else:
         css_file = ''
 
     return mark_safe(
-        f"""<script type="module" src="/static/{manifest['index.html']['file']}"></script>
+        f"""<script type="module" src="/static/{escape(manifest['index.html']['file'])}"></script>
         {css_file}
         {imports_files}"""
     )

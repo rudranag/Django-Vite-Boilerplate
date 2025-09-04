@@ -9,8 +9,8 @@ class TodoAPITestCase(TestCase):
     def setUp(self):
         self.client = Client()
         # Create two users
-        self.user1 = User.objects.create_user(username='user1', password='password1')
-        self.user2 = User.objects.create_user(username='user2', password='password2')
+        self.user1 = User.objects.create_user(username='user1', password='password1')  # nosec
+        self.user2 = User.objects.create_user(username='user2', password='password2')  # nosec
 
         # Create a todo for user1
         self.todo1 = Todo.objects.create(
@@ -26,7 +26,7 @@ class TodoAPITestCase(TestCase):
 
     def test_todo_list_authenticated(self):
         # Test listing todos for an authenticated user
-        self.client.login(username='user1', password='password1')
+        self.client.login(username='user1', password='password1')  # nosec
         response = self.client.get(self.todo_list_create_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
@@ -39,7 +39,7 @@ class TodoAPITestCase(TestCase):
 
     def test_todo_create_authenticated(self):
         # Test creating a todo for an authenticated user
-        self.client.login(username='user1', password='password1')
+        self.client.login(username='user1', password='password1')  # nosec
         data = {
             'title': 'New Todo',
             'description': 'New description',
@@ -62,7 +62,7 @@ class TodoAPITestCase(TestCase):
 
     def test_todo_retrieve_authenticated(self):
         # Test retrieving a todo by an authenticated user
-        self.client.login(username='user1', password='password1')
+        self.client.login(username='user1', password='password1')  # nosec
         response = self.client.get(self.todo_detail_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()['title'], 'User1 Todo')
@@ -74,7 +74,7 @@ class TodoAPITestCase(TestCase):
 
     def test_todo_update_authenticated(self):
         # Test updating a todo by an authenticated user
-        self.client.login(username='user1', password='password1')
+        self.client.login(username='user1', password='password1')  # nosec
         data = {
             'title': 'Updated Todo',
             'description': 'Updated description',
@@ -98,7 +98,7 @@ class TodoAPITestCase(TestCase):
 
     def test_todo_delete_authenticated(self):
         # Test deleting a todo by an authenticated user
-        self.client.login(username='user1', password='password1')
+        self.client.login(username='user1', password='password1')  # nosec
         response = self.client.delete(self.todo_detail_url)
         self.assertEqual(response.status_code, 204)
         self.assertEqual(Todo.objects.count(), 0)
@@ -110,6 +110,6 @@ class TodoAPITestCase(TestCase):
 
     def test_todo_access_another_user_todo(self):
         # Test that user2 cannot access user1's todo
-        self.client.login(username='user2', password='password2')
+        self.client.login(username='user2', password='password2')  # nosec
         response = self.client.get(self.todo_detail_url)
         self.assertEqual(response.status_code, 404)
