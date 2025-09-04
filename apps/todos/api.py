@@ -11,7 +11,7 @@ api = Router(auth=SessionAuth())
 def list_todos(request):
     return Todo.objects.filter(user=request.auth)
 
-@api.post("/", response=TodoSchema)
+@api.post("/", response={201: TodoSchema})
 def create_todo(request, payload: TodoCreateSchema):
     todo = Todo.objects.create(**payload.dict(), user=request.auth)
     return todo
