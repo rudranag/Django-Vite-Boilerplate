@@ -10,7 +10,8 @@ api = Router(auth=SessionAuth())
 
 @api.get("/", response=List[ContactSchema])
 def list_contacts(request):
-    return Contact.objects.filter(user=request.auth).select_related("organization")
+    return Contact.objects.filter(user=request.auth)
+
 @api.post("/", response={201: ContactSchema})
 def create_contact(request, payload: ContactCreateSchema):
     org_id = payload.organization_id
