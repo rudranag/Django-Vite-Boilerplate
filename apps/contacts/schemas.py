@@ -18,9 +18,5 @@ class ContactCreateSchema(Schema):
     phone: Optional[str] = None
     organization_id: int
 
-class ContactUpdateSchema(Schema):
-    first_name: str
-    last_name: str
-    email: str
-    phone: Optional[str] = None
-    organization_id: int
+class ContactUpdateSchema(ContactCreateSchema):
+    pass

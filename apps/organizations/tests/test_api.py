@@ -8,11 +8,11 @@ class OrganizationAPITestCase(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user1 = User.objects.create_user(username='user1', password='password1')  # nosec
+        self.user1 = User.objects.create_user(username='user1', password='password1')
         self.organization1 = Organization.objects.create(name='Org 1')
         self.organization_list_create_url = '/api/v1/organizations/'
         self.organization_detail_url = f'/api/v1/organizations/{self.organization1.id}'
-        self.client.login(username='user1', password='password1')  # nosec
+        self.client.login(username='user1', password='password1')
 
     def test_organization_list(self):
         response = self.client.get(self.organization_list_create_url)

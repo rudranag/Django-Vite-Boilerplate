@@ -8,8 +8,8 @@ class ContactAPITestCase(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user1 = User.objects.create_user(username='user1', password='password1')  # nosec
-        self.user2 = User.objects.create_user(username='user2', password='password2')  # nosec
+        self.user1 = User.objects.create_user(username='user1', password='password1')
+        self.user2 = User.objects.create_user(username='user2', password='password2')
         self.organization = Organization.objects.create(name='Test Org')
         self.contact1 = Contact.objects.create(
             user=self.user1,
@@ -22,7 +22,7 @@ class ContactAPITestCase(TestCase):
         self.contact_detail_url = f'/api/v1/contacts/{self.contact1.id}'
 
     def test_contact_list_authenticated(self):
-        self.client.login(username='user1', password='password1')  # nosec
+        self.client.login(username='user1', password='password1')
         response = self.client.get(self.contact_list_create_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
@@ -33,7 +33,7 @@ class ContactAPITestCase(TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_contact_create_authenticated(self):
-        self.client.login(username='user1', password='password1')  # nosec
+        self.client.login(username='user1', password='password1')
         data = {
             'first_name': 'Jane',
             'last_name': 'Doe',
@@ -56,7 +56,7 @@ class ContactAPITestCase(TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_contact_retrieve_authenticated(self):
-        self.client.login(username='user1', password='password1')  # nosec
+        self.client.login(username='user1', password='password1')
         response = self.client.get(self.contact_detail_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()['first_name'], 'John')
@@ -66,7 +66,7 @@ class ContactAPITestCase(TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_contact_update_authenticated(self):
-        self.client.login(username='user1', password='password1')  # nosec
+        self.client.login(username='user1', password='password1')
         data = {
             'first_name': 'Johnathan',
             'last_name': 'Doe',
@@ -89,7 +89,7 @@ class ContactAPITestCase(TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_contact_delete_authenticated(self):
-        self.client.login(username='user1', password='password1')  # nosec
+        self.client.login(username='user1', password='password1')
         response = self.client.delete(self.contact_detail_url)
         self.assertEqual(response.status_code, 204)
         self.assertEqual(Contact.objects.count(), 0)
@@ -99,6 +99,6 @@ class ContactAPITestCase(TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_contact_access_another_user_contact(self):
-        self.client.login(username='user2', password='password2')  # nosec
+        self.client.login(username='user2', password='password2')
         response = self.client.get(self.contact_detail_url)
         self.assertEqual(response.status_code, 404)

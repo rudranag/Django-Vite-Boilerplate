@@ -7,7 +7,7 @@ class TodoModelTest(TestCase):
 
     def setUp(self):
         # Create a user instance for testing
-        self.user = User.objects.create_user(username="testuser", password="password")  # nosec
+        self.user = User.objects.create_user(username="testuser", password="password")
         self.todo = Todo.objects.create(
             user=self.user,
             title="Test Todo",
